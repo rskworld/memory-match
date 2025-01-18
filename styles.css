@@ -1,0 +1,303 @@
+/* Global Styles */
+body {
+    background-color: #f4f6f9;
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    color: #333;
+    overflow-x: hidden;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    touch-action: manipulation;
+}
+
+/* Prevent blue highlight on mobile */
+* {
+    -webkit-tap-highlight-color: transparent;
+}
+
+/* Game Wrapper */
+.game-wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f8f9fa;
+}
+
+/* Game Container */
+.game-container {
+    background-color: #ffffff;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.game-container:hover {
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+    transform: translateY(-5px);
+}
+
+/* Game Board */
+.game-board {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+    justify-content: center;
+    padding: 20px;
+    perspective: 1000px;
+}
+
+/* Card Styles */
+.card {
+    perspective: 1000px;
+    transition: all 0.3s ease;
+}
+
+.game-board .card {
+    width: 100%;
+    height: 120px;
+    cursor: pointer;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.6s;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.game-board .card .card-front,
+.game-board .card .card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    font-size: 2.5rem;
+    transition: transform 0.6s;
+}
+
+.game-board .card .card-back {
+    background: linear-gradient(135deg, #3498db, #2980b9);
+    color: white;
+    transform: rotateY(0deg);
+}
+
+.game-board .card .card-front {
+    background: linear-gradient(135deg, #2ecc71, #27ae60);
+    color: white;
+    transform: rotateY(180deg);
+}
+
+.game-board .card.flipped .card-back {
+    transform: rotateY(180deg);
+}
+
+.game-board .card.flipped .card-front {
+    transform: rotateY(0);
+}
+
+.game-board .card.matched {
+    opacity: 0.7;
+    cursor: default;
+    animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+/* Buttons */
+.btn-danger, .btn-success, .btn-warning {
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-danger i, .btn-success i, .btn-warning i {
+    margin-right: 10px;
+    position: relative;
+    z-index: 2;
+}
+
+.btn-danger::before, 
+.btn-success::before, 
+.btn-warning::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: rgba(255,255,255,0.2);
+    transition: all 0.3s ease;
+    z-index: 1;
+}
+
+.btn-danger:hover::before, 
+.btn-success:hover::before, 
+.btn-warning:hover::before {
+    left: 0;
+}
+
+.btn-danger:hover, 
+.btn-success:hover, 
+.btn-warning:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Leaderboard */
+.table thead {
+    background: linear-gradient(to right, #3494e6, #ec6ead);
+    color: white;
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+.table-hover tbody tr:hover {
+    background-color: rgba(52, 152, 219, 0.1);
+    transition: background-color 0.3s ease;
+}
+
+/* Contact Info */
+.contact-info {
+    margin-top: 15px;
+}
+
+.contact-info a {
+    color: #007bff;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.contact-info a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -2px;
+    left: 0;
+    background-color: #007bff;
+    transition: width 0.3s ease;
+}
+
+.contact-info a:hover::after {
+    width: 100%;
+}
+
+/* Upcoming Features */
+.bg-info ul li {
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    transition: transform 0.3s ease;
+}
+
+.bg-info ul li:hover {
+    transform: translateX(10px);
+}
+
+.bg-info ul li i {
+    margin-right: 10px;
+    color: rgba(255, 255, 255, 0.7);
+    transition: color 0.3s ease;
+}
+
+.bg-info ul li:hover i {
+    color: rgba(255, 255, 255, 1);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .game-board {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+        padding: 10px;
+    }
+
+    .game-board .card {
+        height: 90px;
+    }
+
+    .game-board .card .card-front,
+    .game-board .card .card-back {
+        font-size: 2rem;
+    }
+
+    .btn-group {
+        flex-direction: column;
+    }
+
+    .btn-group .btn {
+        margin-bottom: 10px;
+    }
+}
+
+@media (max-width: 576px) {
+    .game-board {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 8px;
+    }
+
+    .game-board .card {
+        height: 70px;
+    }
+
+    .game-board .card .card-front,
+    .game-board .card .card-back {
+        font-size: 1.5rem;
+    }
+
+    .container-fluid {
+        padding: 10px;
+    }
+}
+
+/* Difficulty Badge */
+#current-difficulty {
+    font-size: 0.9rem;
+    padding: 0.3rem 0.6rem;
+    background: linear-gradient(to right, #ff6b6b, #feca57);
+    color: white !important;
+}
+
+/* Hover Effects */
+.card-header, .card-footer {
+    transition: all 0.3s ease;
+}
+
+.card-header:hover, .card-footer:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+/* Sound Control Buttons */
+#mute-btn, #bg-music-btn {
+    transition: all 0.3s ease;
+}
+
+#mute-btn:hover, #bg-music-btn:hover {
+    transform: scale(1.1);
+}
+
+/* Accessibility and Touch Improvements */
+@media (max-width: 480px) {
+    .btn, .game-board .card {
+        min-height: 50px;
+        touch-action: manipulation;
+    }
+}

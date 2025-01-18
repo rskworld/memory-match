@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>RSKWORLD Memory Match Game</title>
+    
+    <!-- Manifest and PWA Support -->
+    <link rel="manifest" href="manifest.json">
+    
+    <!-- Favicon from RSKWORLD -->
+    <link rel="icon" type="image/png" href="https://rskworld.in/assets/images/favicon.png">
+    <link rel="apple-touch-icon" href="https://rskworld.in/assets/images/favicon.png">
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome for Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    
+    <!-- Animate.css for Animations -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container-fluid game-wrapper">
+        <div class="row">
+            <div class="col-12 text-center mb-4">
+                <h1 class="display-4 animate__animated animate__fadeIn">🎮 RSKWORLD Memory Match</h1>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-8 offset-md-2">
+                <div class="card game-container shadow-lg animate__animated animate__zoomIn">
+                    <div class="card-header bg-primary text-white">
+                        <div class="row">
+                            <div class="col-4 text-start">
+                                <span>Difficulty: <span id="current-difficulty" class="badge bg-light text-dark">Easy</span></span>
+                            </div>
+                            <div class="col-4 text-center">
+                                <span>Moves: <span id="moves" class="badge bg-light text-dark">0</span></span>
+                            </div>
+                            <div class="col-4 text-end">
+                                <span>Time: <span id="timer" class="badge bg-light text-dark">00:00</span></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="game-board">
+                            <!-- Cards will be dynamically generated here -->
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <div class="row">
+                            <div class="col-md-3 col-6 mb-2">
+                                <button id="restart-btn" class="btn btn-danger w-100 animate__animated animate__pulse">
+                                    <i class="fas fa-redo"></i> Restart
+                                </button>
+                            </div>
+                            <div class="col-md-3 col-6 mb-2">
+                                <button id="difficulty-btn" class="btn btn-success w-100 animate__animated animate__pulse">
+                                    <i class="fas fa-cog"></i> Difficulty
+                                </button>
+                            </div>
+                            <div class="col-md-3 col-6 mb-2">
+                                <button id="clear-leaderboard-btn" class="btn btn-warning w-100 animate__animated animate__pulse">
+                                    <i class="fas fa-trash"></i> Clear Board
+                                </button>
+                            </div>
+                            <div class="col-md-3 col-6 mb-2">
+                                <div class="btn-group w-100" role="group">
+                                    <button id="mute-btn" class="btn btn-secondary w-100">
+                                        <i class="fas fa-volume-up" id="volume-icon"></i>
+                                    </button>
+                                    <button id="bg-music-btn" class="btn btn-info w-100">
+                                        <i class="fas fa-music"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-4">
+            <div class="col-12">
+                <div class="card animate__animated animate__fadeInUp">
+                    <div class="card-header bg-secondary text-white">
+                        <h5 class="mb-0">🏆 Leaderboard</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-striped table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Rank</th>
+                                        <th>Name</th>
+                                        <th>Difficulty</th>
+                                        <th>Moves</th>
+                                        <th>Time</th>
+                                        <th>Date</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="leaderboard-body">
+                                    <!-- Leaderboard entries will be dynamically added here -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-4">
+            <div class="col-md-6 mb-3">
+                <div class="card bg-light animate__animated animate__slideInLeft">
+                    <div class="card-body">
+                        <h5 class="card-title">💬 Game Inquiries</h5>
+                        <p class="card-text">
+                            Interested in this Memory Match game? Want to discuss features, report bugs, or suggest improvements?
+                        </p>
+                        <div class="contact-info">
+                            <p>
+                                <i class="fas fa-envelope"></i> Email: <a href="mailto:help@rskworld.in">help@rskworld.in</a><br>
+                                <i class="fas fa-phone"></i> Mobile/WhatsApp: +91 9330539277
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 mb-3">
+                <div class="card bg-info text-white animate__animated animate__slideInRight">
+                    <div class="card-body">
+                        <h5 class="card-title">🌈 Upcoming Features</h5>
+                        <ul class="list-unstyled">
+                            <li><i class="fas fa-globe"></i> Online multiplayer</li>
+                            <li><i class="fas fa-trophy"></i> Global Leaderboard</li>
+                            <li><i class="fas fa-palette"></i> More game themes</li>
+                            <li><i class="fas fa-robot"></i> Advanced AI strategies</li>
+                        </ul>
+                        <p class="small">Developed with ❤️ by RSKWORLD</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    
+    <!-- Sweet Alert -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    
+    <!-- Custom Script -->
+    <script src="script.js"></script>
+
+    <!-- Service Worker Registration (Optional PWA Support) -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('service-worker.js')
+                    .then(registration => {
+                        console.log('Service Worker registered successfully:', registration.scope);
+                    })
+                    .catch(error => {
+                        console.log('Service Worker registration failed:', error);
+                    });
+            });
+        }
+    </script>
+</body>
+</html>
